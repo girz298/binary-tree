@@ -90,11 +90,6 @@ class BinaryTree {
 				}
 
 				size(){
-					/*var current;
-					current = this.root;
-					if(current.left!=null){
-						current=current.left;
-					}*/
 					var length = 0;
 					this.traverse(function(node){
 						length++;
