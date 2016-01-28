@@ -90,24 +90,16 @@ class BinaryTree {
 				}
 
 				size(){
-			
-					/*var length = 0;
+					/*var current;
+					current = this.root;
+					if(current.left!=null){
+						current=current.left;
+					}*/
+					var length = 0;
 					this.traverse(function(node){
 						length++;
 					});
 					return length;
-
-					        let size = 0;*/
-        let getElementsCount = function(node) {
-            if (node.left)
-                getElementsCount(node.left);
-            if (node.right)
-                getElementsCount(node.right);
-            size++;
-        };
-        if (this.root)
-            getElementsCount(this.root);
-        return size;
 
 				}
 
