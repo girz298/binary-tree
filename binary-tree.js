@@ -66,15 +66,32 @@ class BinaryTree {
 					var parent;
 					current = this.root;
 					restInPiace();
+					
 					function restInPiace() {
-						 if (current.right != null && data > current.data) {
+						if(current.data==data && current.left==null && current.right==null){
+							current.data=null;
+						}
+						else if (current.right != null && data > current.data) {
 							 parent=current;
 							 current = current.right;
-							 if(current.data==data && current.left==null && current.right==null){
+							 if(parent.data==data && parent.left==null && parent.right==null){
 								 parent.right=null;
-							 }else if(current.data==data && current.left==null && current.right!=null){
-								 parent.right=current.right;
-							 } else restInPiace();
+							 }else if(current.data==data && current.left!=null && current.right==null){
+								 parent.right=current.left;
+							 } else if(current.data==data && current.left!=null && current.right!=null){
+							 	var thirdSpecparent;
+							 	thirdSpecparent = current;
+							 	current = current.right;
+							 	var parentOflast;
+							 	parentOflast=thirdSpecparent;
+								 	while (current.left!=null)
+								 	{
+								 		parentOflast=current;
+								 		current=current.left;
+								 	}	
+							 	parentOflast.right = null;
+							 	thirdSpecparent.data  = current.data;
+							 }  else restInPiace();
 						} else if (current.left != null && data < current.data) {
 							 parent=current;
 							 current = current.left;
@@ -82,14 +99,30 @@ class BinaryTree {
 								 parent.left=null;
 							 }else if(current.data==data && current.left!=null && current.right==null){
 								 parent.left=current.left;
+							 }else if(current.data==data && current.left!=null && current.right!=null){
+							 	var thirdSpecparent;
+							 	thirdSpecparent = current;
+							 	current = current.right;
+							 	var parentOflast;
+							 	parentOflast=thirdSpecparent;
+								 	while (current.left!=null)
+								 	{
+								 		
+								 		parentOflast=current;
+								 		current=current.left;
+								 	}	
+							 	parentOflast.right = null;
+							 	thirdSpecparent.data  = current.data;
 							 }
 							 else restInPiace();
 						}
+
 					}
 
 				}
 
 				size(){
+					console.log(this.root);
 					var length = 0;
 					this.traverse(function(node){
 						length++;
@@ -117,7 +150,8 @@ class BinaryTree {
 				
 
 	isEmpty() {
-		if(this.root.data==null && this.root.left==node && this.root.right == null){
+		console.log(this.root);
+		if(this.root==null || (this.root.data==null && this.root.left==null && this.root.right==null)){
 			return true;
 		}else return false;
 	}
